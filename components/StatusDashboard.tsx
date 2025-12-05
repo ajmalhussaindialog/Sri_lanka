@@ -35,15 +35,6 @@ const StatusCard: React.FC<{ item: StatusItem }> = ({ item }) => (
         }`}>
           {getIcon(item.iconName, "w-8 h-8")}
         </div>
-        
-        {/* Live Indicator */}
-        <div className="flex items-center gap-2 bg-slate-50 px-3 py-1.5 rounded-full border border-slate-100">
-           <span className="relative flex h-2.5 w-2.5">
-              <span className={`animate-ping absolute inline-flex h-full w-full rounded-full opacity-75 ${item.status === 'Normal' ? 'bg-emerald-500' : 'bg-yellow-500'}`}></span>
-              <span className={`relative inline-flex rounded-full h-2.5 w-2.5 ${item.status === 'Normal' ? 'bg-emerald-500' : 'bg-yellow-500'}`}></span>
-            </span>
-            <span className="text-xs font-bold uppercase tracking-wider text-slate-500">Live</span>
-        </div>
       </div>
 
       <div>

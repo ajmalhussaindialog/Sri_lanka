@@ -1,15 +1,9 @@
 import { GoogleGenAI } from "@google/genai";
 
-const apiKey = process.env.API_KEY || '';
-
 // Initialize Gemini
-const ai = new GoogleGenAI({ apiKey });
+const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
 
 export const generateTravelResponse = async (userMessage: string): Promise<string> => {
-  if (!apiKey) {
-    return "I'm sorry, but I cannot access the travel database right now. Please check your connection or API key configuration.";
-  }
-
   try {
     const response = await ai.models.generateContent({
       model: 'gemini-2.5-flash',

@@ -1,44 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { ChevronDown, ShieldCheck } from 'lucide-react';
 
-const heroImages = [
-  {
-    url: "https://images.unsplash.com/photo-1586618175024-3450c2688048?q=80&w=2070&auto=format&fit=crop",
-    alt: "Golden Beaches of Southern Sri Lanka"
-  },
-  {
-    url: "https://images.unsplash.com/photo-1546522512-c24c2543c72b?q=80&w=2070&auto=format&fit=crop",
-    alt: "Lush Tea Plantations in Nuwara Eliya"
-  },
-  {
-    url: "https://images.unsplash.com/photo-1585217830217-1f9e200c8b6b?q=80&w=2070&auto=format&fit=crop",
-    alt: "Wild Elephants at Minneriya National Park"
-  },
-  {
-    url: "https://images.unsplash.com/photo-1622303037920-5c66cb17e69f?q=80&w=2070&auto=format&fit=crop",
-    alt: "Majestic Waterfalls of the Hill Country"
-  },
-  {
-    url: "https://images.unsplash.com/photo-1620619767323-b95a89183081?q=80&w=2070&auto=format&fit=crop",
-    alt: "Ancient Fortress of Sigiriya"
-  },
-   {
-    url: "https://images.unsplash.com/photo-1579489225078-27977a775272?q=80&w=2070&auto=format&fit=crop",
-    alt: "Leopards in Yala National Park"
-  }
-];
-
 export const Hero: React.FC = () => {
-  const [currentSlide, setCurrentSlide] = useState(0);
-
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setCurrentSlide((prev) => (prev + 1) % heroImages.length);
-    }, 6000); // Change slide every 6 seconds
-
-    return () => clearInterval(timer);
-  }, []);
-
   const scrollToContent = () => {
     const element = document.getElementById('status-dashboard');
     element?.scrollIntoView({ behavior: 'smooth' });
@@ -46,38 +9,15 @@ export const Hero: React.FC = () => {
 
   return (
     <div className="relative h-screen w-full overflow-hidden bg-slate-900 font-sans">
-      {/* Background Slideshow */}
-      {heroImages.map((img, index) => (
+      {/* Static Background Image */}
+      <div className="absolute inset-0">
         <div 
-          key={index}
-          className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${
-            index === currentSlide ? 'opacity-100' : 'opacity-0'
-          }`}
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat scale-105"
+          style={{ backgroundImage: `url("https://images.unsplash.com/photo-1667890159613-b0780fbe5ec5?q=80&w=1632&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D")` }}
         >
-          <div 
-            className={`absolute inset-0 bg-cover bg-center bg-no-repeat transform transition-transform duration-[10000ms] ease-linear ${index === currentSlide ? 'scale-110' : 'scale-100'}`}
-            style={{ backgroundImage: `url("${img.url}")` }}
-          >
-             {/* Gradient updated to new color via ceylon-green class mapping */}
-             <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/20 to-ceylon-green/90"></div>
-          </div>
+           {/* Gradient Overlay */}
+           <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/10 to-ceylon-green/90"></div>
         </div>
-      ))}
-
-      {/* Slide Indicators */}
-      <div className="absolute bottom-28 left-1/2 transform -translate-x-1/2 flex gap-3 z-20">
-        {heroImages.map((_, index) => (
-          <button
-            key={index}
-            onClick={() => setCurrentSlide(index)}
-            className={`w-2.5 h-2.5 rounded-full transition-all duration-300 shadow-sm ${
-              index === currentSlide 
-                ? 'bg-ceylon-gold w-8' 
-                : 'bg-white/50 hover:bg-white'
-            }`}
-            aria-label={`Go to slide ${index + 1}`}
-          />
-        ))}
       </div>
 
       {/* Content */}
